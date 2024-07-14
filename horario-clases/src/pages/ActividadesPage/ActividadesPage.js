@@ -1,30 +1,49 @@
+import { useParams } from 'react-router-dom';
+
 import ElementoButton from '../../components/ElementoButton/ElementoButton';
 import Add from '../../components/Add/Add';
 import Header from '../../components/Header/Header';
 import Calendario from '../../components/Calendario/Calendario';
 
 import './ActividadesPage.css';
+import { useEffect, useState } from 'react';
 
 
 function ActividadesPage() {
-    const actividades = [];
+    const [actividades, setActividades] = useState();
+    const params = useParams();
 
-    for (let i = 0; i < 20; i++) {
-        actividades.push(
-            <ElementoButton
-                nombre={ i }
-                codigo={ i }
-                span="probando"
-            ></ElementoButton>
-        );
-    }
+    useEffect(() => {
+        fetch(`http://localhost:8080/activitieslist?idSeccion=${ params.seccionID }`)
+          .then((json) => json.json())
+          .then((data) => {
+            const array = [];
+
+            for (const { actividad, siglas, fecha, idActividad } of data.data) {
+              array.push(
+                <ElementoButton
+                  link={ `http://localhost:3000/actividad/${ idActividad }` }
+                  codigo={ siglas }
+                  nombre={ actividad }
+                  span={ fecha }
+                ></ElementoButton>
+              );
+            }
+
+            setActividades(array);
+          });
+      }, []);
 
     return (
         <div className='actividades-container'>
-            <Header perfil="true" back="true"></Header>
+            <Header
+                perfil="true"
+                back="true"
+                link={ `/materia/${ params.materia }/${ params.materiaID }` }
+            ></Header>
             <div className='body-container'>
                 <div className='h1-container'>
-                    <h1 className='h1-seccion'>Back End - Sección 1</h1>
+                    <h1 className='h1-seccion'>{ params.materia }- { `Seccion ${ params.seccion }` }</h1>
                 </div>
                 <div className='list-calendar'>
                     <div className='actividades-list'>

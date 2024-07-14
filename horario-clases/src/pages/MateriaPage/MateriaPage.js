@@ -1,39 +1,51 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import Add from '../../components/Add/Add';
 import ElementoButton from '../../components/ElementoButton/ElementoButton';
 
 import './MateriaPage.css';
+import { useEffect, useState } from 'react';
 
 
-function MateriaPage({ params }) {
-    const location = useLocation();
+function MateriaPage(props) {
+    const [secciones, setSecciones] = useState();
+    const params = useParams();
 
-    console.log(params);
+    useEffect(() => {
+        fetch(`http://localhost:8080/sectionslist?idMateria=${ params.materiaID }`)
+          .then((json) => json.json())
+          .then((data) => {
+            const array = [];
 
-    const secciones = [];
+            for (const { idSeccion, siglas, nombre, profesor } of data.data) {
+              array.push(
+                <ElementoButton
+                  link={ `http://localhost:3000/materia/${ params.materia }/${ params.materiaID }/seccion/${ nombre }/${ idSeccion }` }
+                  codigo={ siglas }
+                  nombre={ nombre }
+                  span={ profesor }
+                ></ElementoButton>
+              );
+            }
 
-    for (let i = 0; i < 20; i++) {
-        secciones.push(
-            <ElementoButton
-                codigo={ i }
-                nombre={ i }
-                span="prueba"
-            ></ElementoButton>
-        );
-    }
+            setSecciones(array);
+          });
+      }, []);
 
     return (
         <div className='materiaPage-container'>
-            <Header perfil="true" back="true"></Header>
+            <Header
+                perfil="true"
+                back="true"
+                link={ `http://localhost:3000` }></Header>
             <div className='h2-container'>
-                <h2 className='h2-materia'>Back End</h2>
+                <h2 className='h2-materia'>{ params.materia }</h2>
             </div>
             <div className='body-container'>
                 <div className='header-container'>
                     <h3 className='h3-secciones'>Secciones</h3>
-                    <Add></Add>
+                    <Add link={`/materia/${ params.materia }/${ params.materiaID }/nuevaSeccion`}></Add>
                 </div>
                 <div className='secciones-list'>
                     { secciones }

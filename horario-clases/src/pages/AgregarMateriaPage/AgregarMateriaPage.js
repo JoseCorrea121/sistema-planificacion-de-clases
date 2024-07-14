@@ -11,8 +11,6 @@ import './AgregarMateriaPage.css';
 function AgregarMateriaPage() {
     const [materia, setMateria] = useState();
 
-    console.log(materia);
-
     return (
         <div className='materia-container'>
             <Header perfil="true" back="true" link="/"></Header>

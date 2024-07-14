@@ -12,6 +12,12 @@ import './PerfilPage.css';
 
 function PerfilPage() {
     const [rol, setRol] = useState('profesor');
+    const [correo, setCorreo] = useState('');
+    const [usuario, setUsuario] = useState('');
+    const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [apellido, setApellido] = useState('');
     const opciones = [
         { value: 'profesor', label: 'Profesor' },
         { value: 'director', label: 'Director' }
@@ -19,17 +25,42 @@ function PerfilPage() {
 
     return (
         <div className="registro-container">
-            <Header back='true' link={ localStorage.getItem('previousPath_perfil') }></Header>
+            <Header back='true' link={ localStorage.getItem('previousPath_perfil') } ></Header>
             <div className="form-register">
                 <div className="registro-h3-container">
                     <h3 className="registro-h3">Regístrese</h3>
                 </div>
-                <InputText etiqueta="Correo" name="correo"></InputText>
-                <InputText etiqueta="Usuario" name="usuario"></InputText>
-                <InputText etiqueta="Contraseña" name="password" password='true'></InputText>
-                <InputText etiqueta="Repetir Contraseña" name="password2" password='true'></InputText>
-                <InputText etiqueta="Nombre" name="nombre"></InputText>
-                <InputText etiqueta="Apellido" name="apellido"></InputText>
+                <InputText
+                    etiqueta="Correo"
+                    name="correo"
+                    value={ correo }
+                    onChange={ setCorreo }
+                ></InputText>
+                <InputText
+                    etiqueta="Usuario"
+                    name="usuario"
+                    value={ usuario }
+                    onChange={ setUsuario }
+                ></InputText>
+                <InputText
+                    etiqueta="Contraseña"
+                    name="password"
+                    value={ password }
+                    onChange={ setPassword }
+                    password='true'
+                ></InputText>
+                <InputText
+                    etiqueta="Nombre"
+                    name="nombre"
+                    value={ nombre }
+                    onChange={ setNombre }
+                ></InputText>
+                <InputText
+                    etiqueta="Apellido"
+                    name="apellido"
+                    value={ apellido }
+                    onChange={ setApellido }
+                ></InputText>
                 <div className="input-select">
                     <label className='etiqueta-text'>Rol</label>
                     <Dropdown
@@ -40,11 +71,24 @@ function PerfilPage() {
                 </div>
                 <div className="link-registrar">
                     <span className="link-label">¿Ya está registrado?</span>
-                    <LinkNuevo content='Inicie Sesión'></LinkNuevo>
+                    <LinkNuevo to="/" content='Inicie Sesión'></LinkNuevo>
                 </div>
                 <div className="form-footer">
-                    <SaveButton></SaveButton>
-                    <CancelButton></CancelButton>
+                    <SaveButton
+                      url="http://localhost:8080/user"
+                      link="/"
+                      body={{
+                          correo: correo,
+                          usuario: usuario,
+                          password: password,
+                          nombre: nombre,
+                          apellido: apellido,
+                          rol: 'profesor'
+                      }}
+                    ></SaveButton>
+                    <CancelButton
+                        link={ localStorage.getItem('previousPath_perfil') }
+                    ></CancelButton>
                 </div>
             </div>
         </div>

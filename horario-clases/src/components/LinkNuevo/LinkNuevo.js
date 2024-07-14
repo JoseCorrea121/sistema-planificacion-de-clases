@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './LinkNuevo.css';
+import { Link } from 'react-router-dom';
 
 
 function LinkNuevo(props) {
@@ -7,16 +8,17 @@ function LinkNuevo(props) {
     const [decoration, setDecoration] = useState('underline');
 
     return (
-        <a
+        <Link
             style={{ color: color, textDecoration: decoration }}
             onMouseEnter={() => setColor('#49454F')}
             onMouseLeave={() => setColor('#21005D')}
             onMouseDown={() => setDecoration('none')}
             onMouseUp={() => setDecoration('underline')}
             className='link-nuevo'
+            to={ props.to }
         >
             { props.content }
-        </a>
+        </Link>
     );
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  useParams } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import InputSelect from '../../components/InputSelect/InputSelect';
@@ -7,27 +7,26 @@ import CancelButton from '../../components/CancelButton/CancelButton';
 import InputText from '../../components/InputText/InputText';
 
 import './AgregarSeccionPage.css';
+import { useEffect, useState } from 'react';
 
 
 function AgregarSeccionPage() {
-    const [semana, setSemana] = useState('1');
-    const [dia, setDia] = useState('1');
+    const [profesores, setProfesores] = useState();
+    const [profesor, setProfesor] = useState('1');
+    const params = useParams();
 
-    const semanaOpciones = [
-        { value: 1,  label: 1 },
-        { value: 2,  label: 2 },
-        { value: 3,  label: 3 },
-        { value: 4,  label: 4 }
-    ];
-    const diaOpciones = [
-        { value: 1,  label: 1 },
-        { value: 2,  label: 2 },
-        { value: 3,  label: 3 },
-        { value: 4,  label: 4 },
-        { value: 5,  label: 5 },
-        { value: 6,  label: 6 },
-        { value: 7,  label: 7 },
-    ];
+    console.log('params', params);
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/professors`)
+          .then((json) => json.json())
+          .then((data) => {
+            console.log(data);
+            setProfesores(data.data);
+          });
+      }, []);
+
+
 
     return (
         <div className='seccion-container'>
@@ -41,15 +40,9 @@ function AgregarSeccionPage() {
                     name="seccion"
                 ></InputText>
                 <InputSelect
-                    value={ semana }
-                    setValue={ setSemana }
-                    opciones={ semanaOpciones }
-                    label="Materia"
-                ></InputSelect>
-                <InputSelect
-                    value={ dia }
-                    setValue={ setDia }
-                    opciones={ diaOpciones }
+                    value={ profesor }
+                    setValue={ setProfesor }
+                    opciones={ profesores }
                     label="Profesor Encargado"
                 ></InputSelect>
                 <div className='footer-container'>

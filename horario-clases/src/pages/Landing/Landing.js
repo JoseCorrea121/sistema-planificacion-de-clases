@@ -18,7 +18,7 @@ function Landing() {
         for (const { idMateria, nombre, siglas, total } of data.data) {
           array.push(
             <ElementoButton
-              link={ `http://localhost:3000/materia/${ idMateria }` }
+              link={ `http://localhost:3000/materia/${ nombre }/${ idMateria }` }
               codigo={ siglas }
               nombre={ nombre }
               span={ `${ total } Secciones` }
