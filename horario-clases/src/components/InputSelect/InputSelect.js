@@ -10,7 +10,7 @@ function InputSelect(props) {
         <div className="input-select">
             <div className='label-container'>
                 <label className='etiqueta-text'>{ props.label }</label>
-                { props.link && <LinkNuevo content={ props.link }></LinkNuevo> }
+                { props.link && <LinkNuevo to={props.link } content={ props.content }></LinkNuevo> }
             </div>
             <Dropdown
                 options={ props.opciones }

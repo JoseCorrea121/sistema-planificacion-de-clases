@@ -73,12 +73,11 @@ function PerfilPage() {
                 </div>
                 <div className="link-registrar">
                     <span className="link-label">¿Ya está registrado?</span>
-                    <LinkNuevo to="/" content='Inicie Sesión'></LinkNuevo>
+                    <LinkNuevo to="/login" content='Inicie Sesión'></LinkNuevo>
                 </div>
                 <div className="form-footer">
                     <SaveButton
                       url="http://localhost:8080/user"
-                      link="/"
                       body={{
                           correo: correo,
                           usuario: usuario,
@@ -87,6 +86,7 @@ function PerfilPage() {
                           apellido: apellido,
                           rol: rol.value
                       }}
+                      link="/login"
                     ></SaveButton>
                     <CancelButton
                         link={ localStorage.getItem('previousPath_perfil') }

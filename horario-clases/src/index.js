@@ -78,7 +78,7 @@ const router = createBrowserRouter([
     element: <ActividadPage></ActividadPage>,
   },
   {
-    path: "/editarActividad/:actividadID",
+    path: "/editarActividad/:actividadID/:claseID",
     element: <EditarActividadPage></EditarActividadPage>
   },
 ]);

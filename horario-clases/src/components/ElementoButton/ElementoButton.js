@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import './ElementoButton.css';
 
 
 function Materia(props) {
     const [color, setColor] = useState('#EADDFF');
+    const location = useLocation();
+    localStorage.setItem('previousPath_activity', location.pathname);
 
     return (
         <div className='elemento-container'>

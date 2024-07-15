@@ -3,7 +3,14 @@ class ClassController {
   async listClasses(parameter) {
     const message = "El idSeccion es requerido";
     if(!parameter.idSeccion)  return {status: 400,  message };
-    const result = await ClassService.list(parameter.idSeccion);
+    const result = await ClassService.list(parameter.idSeccion, true);
+    return result;
+  }
+
+  async listClassesByActivity(parameter) {
+    const message = "El idActividad es requerido";
+    if(!parameter.idActividad)  return {status: 400,  message };
+    const result = await ClassService.list(parameter.idActividad, false);
     return result;
   }
 

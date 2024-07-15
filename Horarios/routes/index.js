@@ -90,6 +90,11 @@ router.get('/classeslist', async (req, res) => {
     res.status(result.status).json(result);
 });
 
+router.get('/classeslistActivity', async (req, res) => {
+    const result = await ClassController.listClassesByActivity(req.query);
+    res.status(result.status).json(result);
+});
+
 router.get('/activitieslist', async (req, res) => {
     const result = await ActivityController.listActivities(req.query);
     res.status(result.status).json(result);

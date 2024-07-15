@@ -39,7 +39,6 @@ function    Calendario(props) {
                 <div className='footer-calendar'>
                     { props.trimestre && <LinkNuevo content='Crear Trimestre'></LinkNuevo> }
                     { props.evento && <LinkNuevo content='Asignar Evento'></LinkNuevo> }
-                    { props.clase && <LinkNuevo content='Asignar Clase'></LinkNuevo> }
                 </div>
             </div>
         </div>

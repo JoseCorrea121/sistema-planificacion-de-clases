@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import Header from '../../components/Header/Header';
 import InputText from '../../components/InputText/InputText';
@@ -11,21 +12,51 @@ import './EditarActividadPage.css';
 
 
 function EditarActividadPage() {
-    const [clase, setClase] = useState('Lunes, 17 de agosto de 2024');
+    const [actividad, setActividad] = useState();
+    const [descripcion, setDescripcion] = useState();
+    const [clase, setClase] = useState({});
+    const [id, setId] = useState();
+    const [claseOpciones, setClaseOpciones] = useState();
+    const params = useParams();
 
-    const claseOpciones = [
-        { value: '1', label: 'Lunes, 17 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 18 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 19 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 20 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 21 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 22 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 23 de agosto de 2024' }
-    ];
+    console.log('Editar ', params);
+    useEffect(() => {
+        fetch(`http://localhost:8080/classeslistActivity?idActividad=${ params.actividadID }`)
+          .then((json) => json.json())
+          .then((data) => {
+            const array = [];
+
+            for (const { idClase, fecha } of data.data) {
+                array.push({
+                    value: idClase,
+                    label: fecha
+                });
+            }
+
+            setClaseOpciones(array);
+            const result = array.find((x) => x.value == params.claseID);
+            setClase(result);
+          });
+        
+        fetch(`http://localhost:8080/activitylist?idActividad=${ params.actividadID }`)
+          .then((json) => json.json())
+          .then((data) => {
+            if(data.status == 200 && data.data.length > 0){
+                const x = data.data[0];
+                setId(x.id);
+                setActividad(x.actividad);
+                setDescripcion(x.descripcion);
+            }
+          });
+        }, []);
 
     return (
         <div className='actividad-container'>
-            <Header perfil="true" back="true"></Header>
+            <Header 
+                perfil="true" 
+                back="true"
+                link= { `/actividad/${ params.actividadID }` }
+            ></Header>
             <div className='container-container'>
                 <div className='formActividad-container'>
                     <div className='h3-container'>
@@ -34,23 +65,39 @@ function EditarActividadPage() {
                     <InputText
                         etiqueta="Actividad"
                         name="actividad"
+                        value={ actividad }
+                        onChange={ setActividad }
+                        setValue={ setActividad }
                     ></InputText>
                     <InputSelect
                         value={ clase }
+                        onChange={ setClase }
                         setValue={ setClase }
                         opciones={ claseOpciones }
                         label="Clase"
-                        link="Asignar clase"
                     ></InputSelect>
                     <div className='inputTextBox-container'>
                         <InputTextBox
                             etiqueta="Descripción"
                             name="descripcion"
+                            value={ descripcion }
+                            onChange={ setDescripcion }
                         ></InputTextBox>
                     </div>
                     <div className='form-footer'>
-                        <SaveButton></SaveButton>
-                        <CancelButton></CancelButton>
+                    <SaveButton
+                        url="http://localhost:8080/activityinsert"
+                        body={{
+                            id: id,
+                            idClase: clase.value,
+                            actividad: actividad,
+                            descripcion: descripcion
+                        }}
+                        link= { `/actividad/${ params.actividadID }` }
+                    ></SaveButton>
+                    <CancelButton
+                        link= { `/actividad/${ params.actividadID }` }
+                    ></CancelButton>
                     </div>
                 </div>
             </div>

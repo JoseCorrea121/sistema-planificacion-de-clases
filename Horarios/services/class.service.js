@@ -1,8 +1,14 @@
 const ClassRepository = require('../repositories/class.repository');
 class ClassService {
-  async list(idSeccion) {
+  async list(id, isSeccion) {
     try {
-      const listClass = await  ClassRepository.list(idSeccion);
+      let listClass;
+      if(isSeccion){
+        listClass = await  ClassRepository.list(id);
+      }else{
+        listClass = await  ClassRepository.listByActivity(id);
+      }
+     
       if(listClass.status == 200){
         const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre", "Octubre", "Noviembre", "Diciembre"];
         let response = [];

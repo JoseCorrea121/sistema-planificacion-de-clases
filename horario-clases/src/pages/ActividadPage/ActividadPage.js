@@ -1,3 +1,6 @@
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import Header from '../../components/Header/Header';
 import EditButton from '../../components/EditButton/EditButton';
 
@@ -5,19 +8,45 @@ import './ActividadPage.css';
 
 
 function ActividadPage() {
+    const [actividad, setActividad] = useState();
+    const [clase, setClase] = useState();
+    const [descripcion, setDescripcion] = useState();
+    const [fecha, setFecha] = useState();
+    const params = useParams();
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/activitylist?idActividad=${ params.actividadID }`)
+          .then((json) => json.json())
+          .then((data) => {
+            if(data.status == 200 && data.data.length > 0){
+                const x = data.data[0];
+                setActividad(x.actividad);
+                setClase(x.id_cla);
+                setDescripcion(x.descripcion);
+                setFecha(x.fecha);
+            }
+          });
+      }, []);
+
     return (
         <div className='actividadPage-container'>
-            <Header perfil="true" back="true"></Header>
+            <Header
+                perfil="true"
+                back="true"
+                link={ localStorage.getItem('previousPath_activity') } 
+            ></Header>
             <div className='datos-container'>
                 <div className='datos-actividad'>
-                    <h2 className='actividad-dato'>E-actividad 2.1</h2>
-                    <span className='actividad-fecha'>cualquiera</span>
+                    <h2 className='actividad-dato'> { actividad  } </h2>
+                    <span className='actividad-fecha'> { fecha } </span>
                 </div>
                 <div>
-                    <EditButton></EditButton>
+                    <EditButton
+                    link={ `/editarActividad/${ params.actividadID }/${ clase }`}
+                    ></EditButton>
                 </div>
             </div>
-            <p>mucho</p>
+            <p>{ descripcion }</p>
         </div>
     );
 }

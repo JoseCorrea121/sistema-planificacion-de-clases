@@ -13,6 +13,22 @@ class ClassRepository {
                 });
         });
     }
+
+    async listByActivity(idActividad) {
+        return new Promise((resolve, reject) => {
+            db.query(
+                `SELECT  c.id AS idClase, c.dia, 
+                DATE_FORMAT(DATE_ADD(t.inicio, INTERVAL ((c.semana - 1) * 7 + (c.dia - 1) )  DAY), '%m-%d-%y') AS fecha
+                FROM clases c JOIN trimestre t ON t.id = c.id_tri 
+                JOIN actividades a ON a.id_cla = c.id WHERE a.id = ${ idActividad } ORDER BY t.inicio DESC;`,
+                (err, results) => {
+                    if (err) reject({status: 500, message: err});
+                    resolve({status: 200, data: results});
+                });
+        });
+    }
+
+
     async searchClass(body) {
         return new Promise((resolve, reject) => {
             db.query(

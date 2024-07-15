@@ -14,7 +14,7 @@ class TrimesterRepository {
     async list() {
         return new Promise((resolve, reject) => {
             db.query(
-                `SELECT id, inicio, fin FROM trimestre ORDER BY inicio, fin DESC;`,
+                `SELECT id as value, CONCAT(DATE_FORMAT(inicio, "%d/%m/%Y"), " - ", DATE_FORMAT(fin, "%d/%m/%Y"))  as label FROM trimestre ORDER BY inicio DESC;`,
                 (err, results) => {
                     if (err) reject({status: 500, message: err});
                     resolve({status: 200, data: results});

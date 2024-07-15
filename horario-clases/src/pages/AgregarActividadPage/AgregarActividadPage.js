@@ -52,13 +52,16 @@ function AgregarActividadPage() {
                         name="actividad"
                         value={ actividad }
                         onChange={ setActividad }
+                        setValue={ setActividad }
                     ></InputText>
                     <InputSelect
                         value={ clase }
+                        onChange={ setClase }
                         setValue={ setClase }
-                        onChange={ clase }
                         opciones={ claseOpciones }
                         label="Clase"
+                        placeholder="Seleccione el Profesor Encargado"
+                        content="Asignar clase"
                         link= { `/materia/${params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaClase` }
                     ></InputSelect>
                     <div className='inputTextBox-container'>
