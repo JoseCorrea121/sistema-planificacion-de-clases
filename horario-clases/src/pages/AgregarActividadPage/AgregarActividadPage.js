@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import InputText from '../../components/InputText/InputText';
@@ -11,21 +12,36 @@ import './AgregarActividadPage.css';
 
 
 function AgregarActividadPage() {
-    const [clase, setClase] = useState('Lunes, 17 de agosto de 2024');
+    const [clase, setClase] = useState({});
+    const [actividad, setActividad] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    const [claseOpciones, setClaseOpciones] = useState();
+    const params = useParams();
 
-    const claseOpciones = [
-        { value: '1', label: 'Lunes, 17 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 18 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 19 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 20 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 21 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 22 de agosto de 2024' },
-        { value: '1', label: 'Lunes, 23 de agosto de 2024' }
-    ];
+    useEffect(() => {
+        fetch(`http://localhost:8080/classesList?idSeccion=${ params.seccionID }`)
+          .then((json) => json.json())
+          .then((data) => {
+            const array = [];
+
+            for (const { idClase, fecha } of data.data) {
+                array.push({
+                    value: idClase,
+                    label: fecha
+                });
+            }
+
+            setClaseOpciones(array);
+          });
+      }, []);
 
     return (
         <div className='actividad-container'>
-            <Header perfil="true" back="true"></Header>
+            <Header 
+                perfil="true"
+                back="true"
+                link={ `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }` }
+            ></Header>
             <div className='container-container'>
                 <div className='formAgregarActividad-container'>
                     <div className='h3-container'>
@@ -34,23 +50,38 @@ function AgregarActividadPage() {
                     <InputText
                         etiqueta="Actividad"
                         name="actividad"
+                        value={ actividad }
+                        onChange={ setActividad }
                     ></InputText>
                     <InputSelect
                         value={ clase }
                         setValue={ setClase }
+                        onChange={ clase }
                         opciones={ claseOpciones }
                         label="Clase"
-                        link="Asignar clase"
+                        link= { `/materia/${params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaClase` }
                     ></InputSelect>
                     <div className='inputTextBox-container'>
                         <InputTextBox
                             etiqueta="Descripción"
                             name="descripcion"
+                            value={ descripcion }
+                            onChange={ setDescripcion }
                         ></InputTextBox>
                     </div>
                     <div className='form-footer'>
-                        <SaveButton></SaveButton>
-                        <CancelButton></CancelButton>
+                    <SaveButton
+                        url="http://localhost:8080/activityinsert"
+                        body={{
+                            idClase: clase.value,
+                            actividad: actividad,
+                            descripcion: descripcion
+                        }}
+                        link={ `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }` }
+                    ></SaveButton>
+                    <CancelButton
+                        link={ `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }` }
+                    ></CancelButton>
                     </div>
                 </div>
             </div>

@@ -11,11 +11,10 @@ import './PerfilPage.css';
 
 
 function PerfilPage() {
-    const [rol, setRol] = useState('profesor');
+    const [rol, setRol] = useState({ value: 'profesor', label: 'Profesor' });
     const [correo, setCorreo] = useState('');
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const opciones = [
@@ -25,7 +24,10 @@ function PerfilPage() {
 
     return (
         <div className="registro-container">
-            <Header back='true' link={ localStorage.getItem('previousPath_perfil') } ></Header>
+            <Header
+                back='true'
+                link={ localStorage.getItem('previousPath_perfil') } 
+            ></Header>
             <div className="form-register">
                 <div className="registro-h3-container">
                     <h3 className="registro-h3">Regístrese</h3>
@@ -83,7 +85,7 @@ function PerfilPage() {
                           password: password,
                           nombre: nombre,
                           apellido: apellido,
-                          rol: 'profesor'
+                          rol: rol.value
                       }}
                     ></SaveButton>
                     <CancelButton

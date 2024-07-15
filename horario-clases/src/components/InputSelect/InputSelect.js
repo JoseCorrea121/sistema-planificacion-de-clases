@@ -16,6 +16,7 @@ function InputSelect(props) {
                 options={ props.opciones }
                 onChange={ props.setValue }
                 value={ props.value }
+                placeholder={ props.placeholder }
             ></Dropdown>
         </div>
     );

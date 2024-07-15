@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Header from '../../components/Header/Header';
 import InputSelect from '../../components/InputSelect/InputSelect';
@@ -9,14 +9,31 @@ import './AgregarClasePage.css';
 
 
 function AgregarClasePage() {
-    const [trimestre, setTrimestre] = useState('1');
+    const [trimestre, setTrimestre] = useState({ value: 0 });
+    const [trimestreOpciones, setTrimestreOpciones] = useState();
     const [semana, setSemana] = useState('1');
     const [dia, setDia] = useState('1');
 
-    const trimestreOpciones = [
-        { value: 1, label: 1 },
-        { value: 2, label: 2 }
-    ];
+    useEffect(() => {
+        fetch('url') //si la ruta necesita un parametro como `localhost?id=${ id }`, id va a ser una dependencia de useEffect
+            .then(json => json.json())
+            .then(data => {
+                const array = []
+
+                for (const { id, inicio, fin } of data.data) {
+                    array.push({
+                        value: id,
+                        label: 'YYYY/MM/DD - YYYY/MM/DD'
+                    });
+                }
+
+                setTrimestreOpciones(array);
+                if (array.length) {
+                    setTrimestre(array[0]);
+                }
+            })
+    }, ['DEPENDENCIAS, por ejemplo params.materiaID']) // y se registra aqui como [id], si no hay dependencias es un array vacio
+
     const semanaOpciones = [
         { value: 1,  label: 1 },
         { value: 2,  label: 2 },
@@ -59,7 +76,13 @@ function AgregarClasePage() {
                     label="Día"
                 ></InputSelect>
                 <div className='footer-container'>
-                    <SaveButton></SaveButton>
+                    <SaveButton
+                        url="http://localhost:8080/subjectinsert"
+                        link="/"
+                        body={{
+                            trimestre: trimestre.value
+                        }}
+                    ></SaveButton>
                     <CancelButton></CancelButton>
                 </div>
             </div>

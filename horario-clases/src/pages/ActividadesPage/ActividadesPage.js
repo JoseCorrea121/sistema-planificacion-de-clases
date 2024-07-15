@@ -9,8 +9,10 @@ import './ActividadesPage.css';
 import { useEffect, useState } from 'react';
 
 
+
 function ActividadesPage() {
     const [actividades, setActividades] = useState();
+
     const params = useParams();
 
     useEffect(() => {
@@ -49,7 +51,7 @@ function ActividadesPage() {
                     <div className='actividades-list'>
                         <div className='actividades-header'>
                             <h3 className='actividades-h3'>Actividades</h3>
-                            <Add></Add>
+                            <Add link={ `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaActividad` }></Add>
                         </div>
                         <div className='actividadesButton-list'>
                             { actividades }
