@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 
 import Header from '../../components/Header/Header';
 import Add from '../../components/Add/Add';
+import Card from '../../components/Card/Card';
 import ElementoButton from '../../components/ElementoButton/ElementoButton';
 
 import './MateriaPage.css';
@@ -30,6 +31,14 @@ function MateriaPage(props) {
                 ></ElementoButton>
               );
             }
+
+            if(array.length == 0){
+              array.push(
+                  <Card
+                      message="Aun no tiene secciones creadas"
+                  ></Card>
+              );
+          }
 
             setSecciones(array);
           });

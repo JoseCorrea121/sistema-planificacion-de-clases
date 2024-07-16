@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 import ElementoButton from '../../components/ElementoButton/ElementoButton';
+import Card from '../../components/Card/Card';
 import Add from '../../components/Add/Add';
 import Header from '../../components/Header/Header';
 import Calendario from '../../components/Calendario/Calendario';
@@ -30,6 +31,14 @@ function ActividadesPage() {
                   span={ fecha }
                 ></ElementoButton>
               );
+            }
+
+            if(array.length == 0){
+                array.push(
+                    <Card
+                        message="Aun no tiene actividades asignadas"
+                    ></Card>
+                );
             }
 
             setActividades(array);
