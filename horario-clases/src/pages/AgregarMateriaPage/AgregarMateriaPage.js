@@ -9,7 +9,7 @@ import './AgregarMateriaPage.css';
 
 
 function AgregarMateriaPage() {
-    const [materia, setMateria] = useState();
+    const [materia, setMateria] = useState('');
 
     return (
         <div className='materia-container'>
@@ -29,6 +29,7 @@ function AgregarMateriaPage() {
                         url="http://localhost:8080/subjectinsert"
                         body={{ materia }}
                         link="/"
+                        label="Guardar"
                     ></SaveButton>
                     <CancelButton
                         link="/"

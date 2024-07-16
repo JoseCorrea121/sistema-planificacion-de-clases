@@ -17,6 +17,13 @@ function AgregarClasePage() {
     const [dia, setDia] = useState({ value: 'lunes',  label: 'Lunes' });
 
 
+    let enlace;
+    if(localStorage.getItem('origen') == 'clase'){
+        enlace  = `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }`;
+    }else{
+        enlace = `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaActividad`;
+    }
+
     useEffect(() => {
         fetch(`http://localhost:8080/trimesterlist`)
           .then((json) => json.json())
@@ -62,7 +69,7 @@ function AgregarClasePage() {
             <Header 
                 perfil='true' 
                 back='true'
-                link={`/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaActividad`}
+                link={ enlace }
             ></Header>
             <div className='form-container'>
                 <div className='h3-container'>
@@ -98,10 +105,11 @@ function AgregarClasePage() {
                             semana: semana.value,
                             dia: dia.value
                         }}
-                        link={`/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaActividad`}
+                        link={ enlace }
+                        label="Guardar"
                     ></SaveButton>
                     <CancelButton
-                        link={`/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaActividad`}
+                        link={ enlace }
                     >
                     </CancelButton>
                 </div>

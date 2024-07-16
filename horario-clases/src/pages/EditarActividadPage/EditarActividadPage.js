@@ -19,7 +19,6 @@ function EditarActividadPage() {
     const [claseOpciones, setClaseOpciones] = useState();
     const params = useParams();
 
-    console.log('Editar ', params);
     useEffect(() => {
         fetch(`http://localhost:8080/classeslistActivity?idActividad=${ params.actividadID }`)
           .then((json) => json.json())
@@ -94,6 +93,7 @@ function EditarActividadPage() {
                             descripcion: descripcion
                         }}
                         link= { `/actividad/${ params.actividadID }` }
+                        label="Guardar"
                     ></SaveButton>
                     <CancelButton
                         link= { `/actividad/${ params.actividadID }` }

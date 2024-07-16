@@ -65,6 +65,7 @@ function AgregarSeccionPage() {
                             idProfe: profesor.value
                         }}
                         link={ `/materia/${ params.materia }/${ params.materiaID }` }
+                        label="Guardar"
                     ></SaveButton>
                     <CancelButton
                         link={ `/materia/${ params.materia }/${ params.materiaID }` }

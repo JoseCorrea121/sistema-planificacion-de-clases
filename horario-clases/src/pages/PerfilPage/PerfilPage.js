@@ -10,7 +10,7 @@ import CancelButton from "../../components/CancelButton/CancelButton";
 import './PerfilPage.css';
 
 
-function PerfilPage() {
+const PerfilPage = () => {
     const [rol, setRol] = useState({ value: 'profesor', label: 'Profesor' });
     const [correo, setCorreo] = useState('');
     const [usuario, setUsuario] = useState('');
@@ -51,19 +51,31 @@ function PerfilPage() {
                     onChange={ setPassword }
                     password='true'
                 ></InputText>
-                <InputText
-                    etiqueta="Nombre"
-                    name="nombre"
-                    value={ nombre }
-                    onChange={ setNombre }
-                ></InputText>
-                <InputText
-                    etiqueta="Apellido"
-                    name="apellido"
-                    value={ apellido }
-                    onChange={ setApellido }
-                ></InputText>
-                <div className="input-select">
+                <>
+                    { (rol.value != 'director')?
+                        <InputText
+                            etiqueta="Nombre"
+                            name="nombre"
+                            value={ nombre }
+                            onChange={ setNombre }
+                        ></InputText>
+                        :
+                            <></>
+                    }
+                </>
+                <>
+                    { (rol.value != 'director')?
+                        <InputText
+                            etiqueta="Apellido"
+                            name="apellido"
+                            value={ apellido }
+                            onChange={ setApellido }
+                        ></InputText>
+                        :
+                            <></>
+                    }
+                </>
+                 <div className="input-select">
                     <label className='etiqueta-text'>Rol</label>
                     <Dropdown
                         options={ opciones }
@@ -87,6 +99,7 @@ function PerfilPage() {
                           rol: rol.value
                       }}
                       link="/login"
+                      label="Crear"
                     ></SaveButton>
                     <CancelButton
                         link={ localStorage.getItem('previousPath_perfil') }

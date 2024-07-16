@@ -59,7 +59,10 @@ function AsignarEventoPage() {
                     label="Día"
                 ></InputSelect>
                 <div className='footer-container'>
-                    <SaveButton></SaveButton>
+                    <SaveButton
+                        label="Guardar"
+                    >
+                    </SaveButton>
                     <CancelButton></CancelButton>
                 </div>
             </div>

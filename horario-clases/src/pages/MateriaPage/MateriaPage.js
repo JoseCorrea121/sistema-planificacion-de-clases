@@ -12,6 +12,8 @@ function MateriaPage(props) {
     const [secciones, setSecciones] = useState();
     const params = useParams();
 
+    localStorage.removeItem('origen');
+
     useEffect(() => {
         fetch(`http://localhost:8080/sectionslist?idMateria=${ params.materiaID }`)
           .then((json) => json.json())

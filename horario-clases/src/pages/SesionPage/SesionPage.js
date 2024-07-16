@@ -8,9 +8,10 @@ import CancelButton from '../../components/CancelButton/CancelButton';
 import './SesionPage.css';
 
 
-function SesionPage() {
+const  SesionPage = () => {
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
+    
     return (
         <div className='sesion-container'>
             <Header
@@ -46,6 +47,8 @@ function SesionPage() {
                           password: password
                         }}
                         link={ localStorage.getItem('previousPath_perfil') }
+                        label="Iniciar sesión"
+                        componente="sesion"
                     ></SaveButton>
                     <CancelButton
                         link={ localStorage.getItem('previousPath_perfil') }

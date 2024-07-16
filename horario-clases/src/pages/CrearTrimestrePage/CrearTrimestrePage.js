@@ -19,7 +19,9 @@ function CrearTrimestrePage() {
                 <InputDate etiqueta="Prueba" name="prueba"></InputDate>
                 <InputDate etiqueta="Prueba" name="prueba"></InputDate>
                 <div className='form-footer'>
-                    <SaveButton></SaveButton>
+                    <SaveButton
+                    label="Guardar"
+                    ></SaveButton>
                     <CancelButton></CancelButton>
                 </div>
             </div>

@@ -18,6 +18,8 @@ function AgregarActividadPage() {
     const [claseOpciones, setClaseOpciones] = useState();
     const params = useParams();
 
+    localStorage.removeItem('origen');
+
     useEffect(() => {
         fetch(`http://localhost:8080/classesList?idSeccion=${ params.seccionID }`)
           .then((json) => json.json())
@@ -81,6 +83,7 @@ function AgregarActividadPage() {
                             descripcion: descripcion
                         }}
                         link={ `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }` }
+                        label="Guardar"
                     ></SaveButton>
                     <CancelButton
                         link={ `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }` }

@@ -57,7 +57,10 @@ function ActividadesPage() {
                             { actividades }
                         </div>
                     </div>
-                    <Calendario clase="true"></Calendario>
+                    <Calendario
+                        clase="true"
+                        link= { `/materia/${params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaClase` }
+                    ></Calendario>
                 </div>
             </div>
         </div>

@@ -7,6 +7,10 @@ function LinkNuevo(props) {
     const [color, setColor] = useState('#21005D');
     const [decoration, setDecoration] = useState('underline');
 
+    if(props.clase){
+        localStorage.setItem('origen', 'clase' );
+    }
+
     return (
         <Link
             style={{ color: color, textDecoration: decoration }}
