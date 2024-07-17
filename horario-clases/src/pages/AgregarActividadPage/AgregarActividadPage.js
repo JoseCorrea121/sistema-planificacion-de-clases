@@ -11,7 +11,7 @@ import InputTextBox from '../../components/InputTextBox/InputTextBox';
 import './AgregarActividadPage.css';
 
 
-function AgregarActividadPage() {
+const AgregarActividadPage = () => {
     const [clase, setClase] = useState({});
     const [actividad, setActividad] = useState('');
     const [descripcion, setDescripcion] = useState('');

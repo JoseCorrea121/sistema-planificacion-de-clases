@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./MesButton.css"
 
 
-function MesButton(props) {
+const MesButton = (props) => {
     const [buttonColor, setButtonColor] = useState('#EADDFF');
 
     return (

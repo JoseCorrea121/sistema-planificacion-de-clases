@@ -7,7 +7,7 @@ import EditButton from '../../components/EditButton/EditButton';
 import './ActividadPage.css';
 
 
-function ActividadPage() {
+const ActividadPage = () => {
     const [actividad, setActividad] = useState();
     const [clase, setClase] = useState();
     const [descripcion, setDescripcion] = useState();
@@ -21,7 +21,7 @@ function ActividadPage() {
             if(data.status == 200 && data.data.length > 0){
                 const x = data.data[0];
                 setActividad(x.actividad);
-                setClase(x.id_cla);
+                setClase(x.idClase);
                 setDescripcion(x.descripcion);
                 setFecha(x.fecha);
             }

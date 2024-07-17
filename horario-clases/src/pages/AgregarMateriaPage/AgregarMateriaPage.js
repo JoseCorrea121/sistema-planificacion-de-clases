@@ -8,7 +8,7 @@ import CancelButton from '../../components/CancelButton/CancelButton';
 import './AgregarMateriaPage.css';
 
 
-function AgregarMateriaPage() {
+const AgregarMateriaPage = () => {
     const [materia, setMateria] = useState('');
 
     return (

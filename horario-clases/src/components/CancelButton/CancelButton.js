@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './CancelButton.css';
 
 
-function CancelButton(props) {
+const CancelButton = (props) => {
     return (
         <Link
             className='cancel-button'

@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './PerfilButton.css';
 
 
-function PerfilButton() {
+const PerfilButton = () => {
   const [iconoColor, setIconoColor] = useState('#21005D');
   const [buttonColor, setButtonColor] = useState('#EADDFF')
   const location = useLocation();

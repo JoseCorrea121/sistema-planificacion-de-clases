@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 
 
 
-function ActividadesPage() {
+const ActividadesPage = () => {
     const [actividades, setActividades] = useState();
 
     const params = useParams();

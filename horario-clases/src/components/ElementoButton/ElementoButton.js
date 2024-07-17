@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './ElementoButton.css';
 
 
-function Materia(props) {
+const Materia = (props) => {
     const [color, setColor] = useState('#EADDFF');
     const location = useLocation();
     localStorage.setItem('previousPath_activity', location.pathname);

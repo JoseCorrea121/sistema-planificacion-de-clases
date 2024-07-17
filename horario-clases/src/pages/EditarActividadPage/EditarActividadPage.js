@@ -11,15 +11,22 @@ import InputTextBox from '../../components/InputTextBox/InputTextBox';
 import './EditarActividadPage.css';
 
 
-function EditarActividadPage() {
+const EditarActividadPage = () => {
     const [actividad, setActividad] = useState();
     const [descripcion, setDescripcion] = useState();
     const [clase, setClase] = useState({});
     const [id, setId] = useState();
     const [claseOpciones, setClaseOpciones] = useState();
+    const [materia, setMateria] = useState();
+    const [materiaID, setMateriaID] = useState({});
+    const [seccion, setSeccion] = useState();
+    const [seccionID, setSeccionID] = useState({});
     const params = useParams();
 
     useEffect(() => {
+        localStorage.removeItem('idClase');
+        localStorage.removeItem('idActividad');
+        localStorage.setItem('origen', 'editarActividad' );
         fetch(`http://localhost:8080/classeslistActivity?idActividad=${ params.actividadID }`)
           .then((json) => json.json())
           .then((data) => {
@@ -42,9 +49,15 @@ function EditarActividadPage() {
           .then((data) => {
             if(data.status == 200 && data.data.length > 0){
                 const x = data.data[0];
-                setId(x.id);
+                setId(x.idActividad);
                 setActividad(x.actividad);
                 setDescripcion(x.descripcion);
+                setMateria(x.materia);
+                setMateriaID(x.idMateria);
+                setSeccion(x.seccion);
+                setSeccionID(x.idSeccion);
+                localStorage.setItem('idClase', x.idClase );
+                localStorage.setItem('idActividad', x.idActividad );
             }
           });
         }, []);
@@ -74,6 +87,8 @@ function EditarActividadPage() {
                         setValue={ setClase }
                         opciones={ claseOpciones }
                         label="Clase"
+                        content="Asignar clase"
+                        link= { `/materia/${ materia }/${ materiaID }/seccion/${ seccion }/${ seccionID }/nuevaClase` }
                     ></InputSelect>
                     <div className='inputTextBox-container'>
                         <InputTextBox

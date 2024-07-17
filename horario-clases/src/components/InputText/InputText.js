@@ -4,7 +4,7 @@ import ShowButton from '../ShowButton/ShowButton';
 import './InputText.css';
 
 
-function InputText(props) {
+const InputText = (props) => {
     const [pass, setType] = useState('password');
 
     return (

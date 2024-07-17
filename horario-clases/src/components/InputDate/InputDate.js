@@ -1,9 +1,6 @@
-import { useState } from 'react';
 import './InputDate.css';
 
-
-function InputDate(props) {
-    const [value, setValue] = useState('');
+const InputDate = (props) => {
 
     return (
         <div className='input-container'>
@@ -13,8 +10,8 @@ function InputDate(props) {
                     className='input-date'
                     type="date"
                     name={ props.name }
-                    value={ value }
-                    onChange={(e) => setValue(e.target.value)}
+                    value={ props.value }
+                    onChange={(e) => props.onChange(e.target.value)}
                 />
             </div>
         </div>

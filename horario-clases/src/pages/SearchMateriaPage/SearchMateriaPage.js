@@ -5,7 +5,7 @@ import Search from '../../components/Search/Search';
 import './SearchMateriaPage.css';
 
 
-function SearchMateriaPage() {
+const SearchMateriaPage = () => {
     const materias = [];
 
     for (let i = 0; i < 20; i++) {

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './SearchButton.css';
 
 
-function SearchButton() {
+const SearchButton = () => {
   const [iconoColor, setIconoColor] = useState('#21005D');
   const [buttonColor, setButtonColor] = useState('#EADDFF')
 

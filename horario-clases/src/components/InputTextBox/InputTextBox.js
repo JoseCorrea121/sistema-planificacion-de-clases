@@ -1,7 +1,7 @@
 import './InputTextBox.css';
 
 
-function InputTextBox(props) {
+const InputTextBox = (props) => {
     return (
         <div className='box-container'>
             <label className='box-label'>{ props.etiqueta }</label>

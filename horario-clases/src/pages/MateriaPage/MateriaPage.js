@@ -9,7 +9,7 @@ import './MateriaPage.css';
 import { useEffect, useState } from 'react';
 
 
-function MateriaPage(props) {
+const MateriaPage = (props)  => {
     const [secciones, setSecciones] = useState();
     const params = useParams();
 

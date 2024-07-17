@@ -5,7 +5,7 @@ import PerfilButton from "../PerfilButton/PerfilButton";
 import "./Header.css";
 
 
-function Header(props) {
+const Header = (props) => {
   return (
     <header className="header-page">
       <h1 className="logo">UVM Horarios</h1>

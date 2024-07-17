@@ -8,21 +8,50 @@ import CancelButton from '../../components/CancelButton/CancelButton';
 import './CrearTrimestrePage.css';
 
 
-function CrearTrimestrePage() {
+const CrearTrimestrePage = () => {
+    const [inicio, setInicio] = useState('');
+    const [fin, setFin] = useState('');
+    
+
     return (
         <div className='trimestre-container'>
-            <Header perfil='true' back='true'></Header>
+            <Header
+                perfil='true'
+                back='true'
+                link="/"
+            ></Header>
             <div className='form-container'>
                 <div className='h3-container'>
                     <h3 className='h3-trimestre'>Crear Trimestre</h3>
                 </div>
-                <InputDate etiqueta="Prueba" name="prueba"></InputDate>
-                <InputDate etiqueta="Prueba" name="prueba"></InputDate>
+                <InputDate
+                    etiqueta="inicio"
+                    name="inicio"
+                    onChange={ setInicio }
+                    value={ inicio }
+                ></InputDate>
+                <InputDate
+                    etiqueta="fin"
+                    name="fin"
+                    onChange={ setFin }
+                    value={ fin }
+                ></InputDate>
                 <div className='form-footer'>
                     <SaveButton
-                    label="Guardar"
+                        url="http://localhost:8080/trimesterinsert"
+                        body={
+                            {
+                                inicio: inicio,
+                                fin: fin
+                            }
+                        }
+                        link="/"
+                        label="Crear"
+                        componente="trimestre"
                     ></SaveButton>
-                    <CancelButton></CancelButton>
+                    <CancelButton
+                        link="/"
+                    ></CancelButton>
                 </div>
             </div>
         </div>

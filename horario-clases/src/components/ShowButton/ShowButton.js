@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './ShowButton.css';
 
 
-function ShowButton(props) {
+const ShowButton = (props) => {
     const [colorButton, setColorButton] = useState('#FFFFFF');
     const [colorIcon, setColorIcon] = useState('#21005D');
 

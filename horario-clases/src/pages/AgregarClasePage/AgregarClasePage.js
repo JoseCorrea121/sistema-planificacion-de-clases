@@ -9,7 +9,7 @@ import CancelButton from '../../components/CancelButton/CancelButton';
 import './AgregarClasePage.css';
 
 
-function AgregarClasePage() {
+const AgregarClasePage = () => {
     const params = useParams();
     const [trimestre, setTrimestre] = useState({});
     const [trimestreOpciones, setTrimestreOpciones] = useState();
@@ -18,11 +18,16 @@ function AgregarClasePage() {
 
 
     let enlace;
-    if(localStorage.getItem('origen') == 'clase'){
-        enlace  = `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }`;
-    }else{
-        enlace = `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaActividad`;
-    }
+    switch (localStorage.getItem('origen')) {
+        case 'clase':
+            enlace  = `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }`;
+            break;
+        case 'editarActividad':
+            enlace  = '/editarActividad/' + localStorage.getItem('idActividad') + '/' + localStorage.getItem('idClase');
+            break;
+        default:
+            enlace = `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaActividad`;
+      }
 
     useEffect(() => {
         fetch(`http://localhost:8080/trimesterlist`)

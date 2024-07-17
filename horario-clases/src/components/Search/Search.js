@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './Search.css';
 
 
-function Search(props) {
+const Search = (props) => {
     const [colorInput, setColorInput] = useState('#EADDFF');
     const [colorIcon, setColorIcon] = useState('#21005D');
 

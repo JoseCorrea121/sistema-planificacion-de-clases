@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './BackButton.css';
 
 
-function BackButton(props) {
+const BackButton = (props) => {
   const [iconoColor, setIconoColor] = useState('#21005D');
   const [buttonColor, setButtonColor] = useState('#EADDFF')
 

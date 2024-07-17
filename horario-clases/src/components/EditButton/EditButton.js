@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './EditButton.css';
 
 
-function EditButton(props) {
+const EditButton = (props) => {
     const [colorButton, setColorButton] = useState('#EADDFF');
     const [colorIcon, setColorIcon] = useState('#21005D');
 

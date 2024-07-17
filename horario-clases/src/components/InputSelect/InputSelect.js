@@ -5,7 +5,7 @@ import LinkNuevo from '../LinkNuevo/LinkNuevo';
 import './InputSelect.css';
 
 
-function InputSelect(props) {
+const InputSelect = (props) => {
     return (
         <div className="input-select">
             <div className='label-container'>

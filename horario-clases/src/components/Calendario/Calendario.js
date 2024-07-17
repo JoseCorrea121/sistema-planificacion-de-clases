@@ -12,7 +12,7 @@ import getDia from '../../functions/dia';
 import './Calendario.css';
 
 
-function    Calendario(props) {
+const Calendario = (props) => {
     const [value, onChange] = useState(new Date());
     const mes = getMes(value);
     const fecha = new Date();
@@ -37,8 +37,8 @@ function    Calendario(props) {
             </div>
             <div className='footer-container'>
                 <div className='footer-calendar'>
-                    { props.trimestre && <LinkNuevo content='Crear Trimestre'></LinkNuevo> }
-                    { props.evento && <LinkNuevo content='Asignar Evento'></LinkNuevo> }
+                    { props.trimestre && <LinkNuevo content='Crear Trimestre' to={ props.link }></LinkNuevo> }
+                    { props.evento && <LinkNuevo content='Asignar Evento' to={ props.linkevent }></LinkNuevo> }
                     { props.clase && <LinkNuevo content='Asignar Clase' to={ props.link } clase="true"></LinkNuevo> }
                 </div>
             </div>

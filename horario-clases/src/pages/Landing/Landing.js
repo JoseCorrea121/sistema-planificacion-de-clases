@@ -6,7 +6,7 @@ import Add from '../../components/Add/Add';
 import './Landing.css';
 import { useEffect, useState } from 'react';
 
-function Landing() {
+const Landing = () => {
   const [materias, setMaterias] = useState();
 
   useEffect(() => {
@@ -43,7 +43,12 @@ function Landing() {
             { materias }
           </div>
         </div>
-        <Calendario></Calendario>
+        <Calendario
+          trimestre="true"
+          evento="true"
+          link="/nuevoTrimestre"
+          linkevent="/nuevoEvento"
+        ></Calendario>
       </div>
     </div>
   );

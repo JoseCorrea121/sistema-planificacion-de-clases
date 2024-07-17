@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Add.css';
 
-
-function Add(props) {
+const Add = (props) => {
     const [colorButton, setColorButton] = useState('#EADDFF');
     const [colorIcon, setColorIcon] = useState('#21005D');
 

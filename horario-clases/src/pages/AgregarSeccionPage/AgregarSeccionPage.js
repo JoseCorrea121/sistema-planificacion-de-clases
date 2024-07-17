@@ -10,7 +10,7 @@ import './AgregarSeccionPage.css';
 import { useEffect, useState } from 'react';
 
 
-function AgregarSeccionPage() {
+const AgregarSeccionPage = () => {
     const params = useParams();
     const [profesores, setProfesores] = useState();
     const [profesor, setProfesor] = useState({});

@@ -3,7 +3,7 @@ import './LinkNuevo.css';
 import { Link } from 'react-router-dom';
 
 
-function LinkNuevo(props) {
+const LinkNuevo = (props) => {
     const [color, setColor] = useState('#21005D');
     const [decoration, setDecoration] = useState('underline');
 

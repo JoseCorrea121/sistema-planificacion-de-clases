@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './PreviousButton.css';
 
 
-function PreviousButton(props) {
+const PreviousButton = (props) => {
     const [buttonColor, setButtonColor] = useState('#EADDFF');
     const fecha = new Date(props.fecha);
     
