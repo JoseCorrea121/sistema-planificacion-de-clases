@@ -20,26 +20,35 @@ const MateriaPage = (props)  => {
           .then((json) => json.json())
           .then((data) => {
             const array = [];
+            if(data.status == 200){
+              for (const { idSeccion, siglas, nombre, profesor, totalActividades } of data.data) {
+                 const span = profesor + " [ " + totalActividades + " Actividades ]";
+                array.push(
+                  <ElementoButton
+                    link={ `http://localhost:3000/materia/${ params.materia }/${ params.materiaID }/seccion/${ nombre }/${ idSeccion }` }
+                    codigo={ siglas }
+                    nombre={ nombre }
+                    span={ span }
+                  ></ElementoButton>
+                );
+              }
 
-            for (const { idSeccion, siglas, nombre, profesor } of data.data) {
-              array.push(
-                <ElementoButton
-                  link={ `http://localhost:3000/materia/${ params.materia }/${ params.materiaID }/seccion/${ nombre }/${ idSeccion }` }
-                  codigo={ siglas }
-                  nombre={ nombre }
-                  span={ profesor }
-                ></ElementoButton>
-              );
+              if(array.length == 0){
+                array.push(
+                    <Card
+                        message="Aun no tiene secciones creadas"
+                    ></Card>
+                );
+              }
+            }else{
+              if(array.length == 0){
+                array.push(
+                    <Card
+                        message="Error en el servicio"
+                    ></Card>
+                );
+              }
             }
-
-            if(array.length == 0){
-              array.push(
-                  <Card
-                      message="Aun no tiene secciones creadas"
-                  ></Card>
-              );
-          }
-
             setSecciones(array);
           });
       }, []);
