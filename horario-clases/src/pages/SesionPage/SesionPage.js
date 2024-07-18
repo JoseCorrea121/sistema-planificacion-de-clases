@@ -37,7 +37,7 @@ const  SesionPage = () => {
                 ></InputText>
                 <div className='link-sesion'>
                     <span className='link-label'>¿No está registrado?</span>
-                    <LinkNuevo content='Regístrese'></LinkNuevo>
+                    <LinkNuevo  to="/signup" content='Regístrese'></LinkNuevo>
                 </div>
                 <div className='form-footer'>
                     <SaveButton

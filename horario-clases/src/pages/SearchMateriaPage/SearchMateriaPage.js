@@ -9,7 +9,6 @@ import './SearchMateriaPage.css';
 const SearchMateriaPage = () => {
     const [materias, setMaterias] = useState();
     const [materiasr, setMateriasr] = useState();
-    const [busqueda, setBusqueda] = useState();
     const [colorInput, setColorInput] = useState('#EADDFF');
     const [colorIcon, setColorIcon] = useState('#21005D');
 
@@ -93,7 +92,6 @@ const SearchMateriaPage = () => {
                 <input
                     style={{ backgroundColor: colorInput }}
                     type="text"
-                    name={ busqueda }
                     className='search-input'
                     onMouseDown={() => {
                         setColorInput('#D1C6E4');

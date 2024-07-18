@@ -3,11 +3,14 @@ import { useEffect, useState } from 'react';
 
 import Header from '../../components/Header/Header';
 import EditButton from '../../components/EditButton/EditButton';
+import Cookies from 'universal-cookie';
 
 import './ActividadPage.css';
 
 
 const ActividadPage = () => {
+    const cookies = new Cookies(null, { path: '/' });
+    const haveRol =  cookies.get('rolUser') && cookies.get('rolUser').toLowerCase() == 'director';
     const [actividad, setActividad] = useState();
     const [clase, setClase] = useState();
     const [descripcion, setDescripcion] = useState();
@@ -41,9 +44,16 @@ const ActividadPage = () => {
                     <span className='actividad-fecha'> { fecha } </span>
                 </div>
                 <div>
-                    <EditButton
-                    link={ `/editarActividad/${ params.actividadID }/${ clase }`}
-                    ></EditButton>
+                <>
+                    { (haveRol)? 
+                         <EditButton
+                            link={ `/editarActividad/${ params.actividadID }/${ clase }`}
+                         ></EditButton>
+                        : 
+                        <></> 
+                    }
+                </>
+                   
                 </div>
             </div>
             <p>{ descripcion }</p>

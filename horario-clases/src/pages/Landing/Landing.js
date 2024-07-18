@@ -2,11 +2,14 @@ import Header from '../../components/Header/Header';
 import Calendario from '../../components/Calendario/Calendario';
 import ElementoButton from '../../components/ElementoButton/ElementoButton';
 import Add from '../../components/Add/Add';
+import Cookies from 'universal-cookie';
 
 import './Landing.css';
 import { useEffect, useState } from 'react';
 
 const Landing = () => {
+  const cookies = new Cookies(null, { path: '/' });
+  const haveRol =  cookies.get('rolUser') && cookies.get('rolUser').toLowerCase() == 'director';
   const [materias, setMaterias] = useState();
 
   useEffect(() => {
@@ -30,6 +33,7 @@ const Landing = () => {
       });
   }, []);
 
+
   return (
     <div className='container'>
       <Header search="true" perfil="true"></Header>
@@ -37,7 +41,9 @@ const Landing = () => {
         <div className='materia-listado'>
           <div className='materias-header'>
             <h3>Materias Registradas</h3>
-            <Add link="/nuevaMateria"></Add>
+            <>
+              { (haveRol)? <Add link="/nuevaMateria"></Add> : <></> }
+            </>
           </div>
           <div className='materias'>
             { materias }

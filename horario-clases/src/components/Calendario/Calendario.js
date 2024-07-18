@@ -1,5 +1,7 @@
 import Calendar from 'react-calendar';
 import { useState } from 'react';
+import Cookies from 'universal-cookie';
+
 
 import PreviousButton from '../PreviousButton/PreviousButton';
 import NextButton from '../NextButton/NextButton';
@@ -13,10 +15,12 @@ import './Calendario.css';
 
 
 const Calendario = (props) => {
+    const cookies = new Cookies(null, { path: '/' });
     const [value, onChange] = useState(new Date());
     const mes = getMes(value);
     const fecha = new Date();
-
+    
+    const haveRol =  cookies.get('rolUser') && cookies.get('rolUser').toLowerCase() == 'director';
     return (
         <div className='calendar'>
             <div className='fecha-contenedor'>
@@ -37,9 +41,9 @@ const Calendario = (props) => {
             </div>
             <div className='footer-container'>
                 <div className='footer-calendar'>
-                    { props.trimestre && <LinkNuevo content='Crear Trimestre' to={ props.link }></LinkNuevo> }
-                    { props.evento && <LinkNuevo content='Asignar Evento' to={ props.linkevent }></LinkNuevo> }
-                    { props.clase && <LinkNuevo content='Asignar Clase' to={ props.link } clase="true"></LinkNuevo> }
+                    { haveRol && props.trimestre && <LinkNuevo content='Crear Trimestre' to={ props.link }></LinkNuevo> }
+                    { haveRol && props.evento && <LinkNuevo content='Asignar Evento' to={ props.linkevent }></LinkNuevo> }
+                    { haveRol && props.clase && <LinkNuevo content='Asignar Clase' to={ props.link } clase="true"></LinkNuevo> }
                 </div>
             </div>
         </div>

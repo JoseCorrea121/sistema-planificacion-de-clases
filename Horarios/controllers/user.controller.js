@@ -33,10 +33,7 @@ class UserController {
             const password = Buffer.from(parameters.password, 'base64').toString();
             const  result = await UserService.login(parameters.usuario, password);
 
-            return {
-                status: 200,
-                message: result
-            }
+            return result;
         }
 
         let message;

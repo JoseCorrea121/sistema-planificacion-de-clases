@@ -4,14 +4,17 @@ import Header from '../../components/Header/Header';
 import Add from '../../components/Add/Add';
 import Card from '../../components/Card/Card';
 import ElementoButton from '../../components/ElementoButton/ElementoButton';
+import Cookies from 'universal-cookie';
 
 import './MateriaPage.css';
 import { useEffect, useState } from 'react';
 
 
 const MateriaPage = (props)  => {
-    const [secciones, setSecciones] = useState();
-    const params = useParams();
+  const cookies = new Cookies(null, { path: '/' });
+  const haveRol =  cookies.get('rolUser') && cookies.get('rolUser').toLowerCase() == 'director';
+  const [secciones, setSecciones] = useState();
+  const params = useParams();
 
     localStorage.removeItem('origen');
 
@@ -65,7 +68,9 @@ const MateriaPage = (props)  => {
             <div className='body-container'>
                 <div className='header-container'>
                     <h3 className='h3-secciones'>Secciones</h3>
-                    <Add link={`/materia/${ params.materia }/${ params.materiaID }/nuevaSeccion`}></Add>
+                    <>
+                      { (haveRol)? <Add link={`/materia/${ params.materia }/${ params.materiaID }/nuevaSeccion`}></Add> : <></> }
+                    </>
                 </div>
                 <div className='secciones-list'>
                     { secciones }

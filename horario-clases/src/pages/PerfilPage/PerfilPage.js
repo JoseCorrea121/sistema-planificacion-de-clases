@@ -100,6 +100,7 @@ const PerfilPage = () => {
                       }}
                       link="/login"
                       label="Crear"
+                      componente="perfil"
                     ></SaveButton>
                     <CancelButton
                         link={ localStorage.getItem('previousPath_perfil') }

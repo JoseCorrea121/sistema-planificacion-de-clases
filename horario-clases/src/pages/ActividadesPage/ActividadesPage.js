@@ -5,6 +5,7 @@ import Card from '../../components/Card/Card';
 import Add from '../../components/Add/Add';
 import Header from '../../components/Header/Header';
 import Calendario from '../../components/Calendario/Calendario';
+import Cookies from 'universal-cookie';
 
 import './ActividadesPage.css';
 import { useEffect, useState } from 'react';
@@ -12,6 +13,8 @@ import { useEffect, useState } from 'react';
 
 
 const ActividadesPage = () => {
+    const cookies = new Cookies(null, { path: '/' });
+    const haveRol =  cookies.get('rolUser') && cookies.get('rolUser').toLowerCase() == 'director';
     const [actividades, setActividades] = useState();
 
     const params = useParams();
@@ -60,7 +63,9 @@ const ActividadesPage = () => {
                     <div className='actividades-list'>
                         <div className='actividades-header'>
                             <h3 className='actividades-h3'>Actividades</h3>
-                            <Add link={ `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaActividad` }></Add>
+                            <>
+                                { (haveRol)? <Add link={ `/materia/${ params.materia }/${ params.materiaID }/seccion/${ params.seccion }/${ params.seccionID }/nuevaActividad` }></Add> : <></> }
+                            </>
                         </div>
                         <div className='actividadesButton-list'>
                             { actividades }
