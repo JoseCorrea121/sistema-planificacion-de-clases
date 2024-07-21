@@ -19,8 +19,9 @@ class ClassRepository {
             db.query(
                 `SELECT  c.id AS idClase, c.dia, 
                 DATE_FORMAT(DATE_ADD(t.inicio, INTERVAL ((c.semana - 1) * 7 + (c.dia - 1) )  DAY), '%m-%d-%y') AS fecha
-                FROM clases c JOIN trimestre t ON t.id = c.id_tri 
-                JOIN actividades a ON a.id_cla = c.id WHERE a.id = ${ idActividad } ORDER BY t.inicio DESC;`,
+                FROM clases c JOIN trimestre t ON t.id = c.id_tri JOIN secciones s ON s.id = c.id_sec  
+                WHERE s.id = (SELECT id_sec FROM clases c2 JOIN actividades a ON a.id_cla = c2.id  WHERE a.id = ${ idActividad } LIMIT 1)
+                ORDER BY t.inicio DESC;`,
                 (err, results) => {
                     if (err) reject({status: 500, message: err});
                     resolve({status: 200, data: results});

@@ -10,7 +10,7 @@ import './ActividadPage.css';
 
 const ActividadPage = () => {
     const cookies = new Cookies(null, { path: '/' });
-    const haveRol =  cookies.get('rolUser') && cookies.get('rolUser').toLowerCase() == 'director';
+    const haveRol =  cookies.get('rolUser') && (cookies.get('rolUser').toLowerCase() == 'director' || cookies.get('rolUser').toLowerCase() == 'profesor');
     const [actividad, setActividad] = useState();
     const [clase, setClase] = useState();
     const [descripcion, setDescripcion] = useState();

@@ -12,7 +12,6 @@ const Header = (props) => {
   const cookies = new Cookies(null, { path: '/' });
   const haveRol =  cookies.get('rolUser') != undefined;
   const isPerfil = props.perfil ? props.perfil == 'true': false;
-  console.log('haveRol -> ' + haveRol);
   return (
     <header className="header-page">
       <h1 className="logo">UVM Horarios</h1>

@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react';
 
 const ActividadesPage = () => {
     const cookies = new Cookies(null, { path: '/' });
-    const haveRol =  cookies.get('rolUser') && cookies.get('rolUser').toLowerCase() == 'director';
+    const haveRol = cookies.get('rolUser') && (cookies.get('rolUser').toLowerCase() == 'director' || cookies.get('rolUser').toLowerCase() == 'profesor');
     const [actividades, setActividades] = useState();
 
     const params = useParams();

@@ -21,6 +21,7 @@ const Calendario = (props) => {
     const fecha = new Date();
     
     const haveRol =  cookies.get('rolUser') && cookies.get('rolUser').toLowerCase() == 'director';
+    const haveRolTotal = cookies.get('rolUser') && (cookies.get('rolUser').toLowerCase() == 'director' || cookies.get('rolUser').toLowerCase() == 'profesor');
     return (
         <div className='calendar'>
             <div className='fecha-contenedor'>
@@ -43,7 +44,7 @@ const Calendario = (props) => {
                 <div className='footer-calendar'>
                     { haveRol && props.trimestre && <LinkNuevo content='Crear Trimestre' to={ props.link }></LinkNuevo> }
                     { haveRol && props.evento && <LinkNuevo content='Asignar Evento' to={ props.linkevent }></LinkNuevo> }
-                    { haveRol && props.clase && <LinkNuevo content='Asignar Clase' to={ props.link } clase="true"></LinkNuevo> }
+                    { haveRolTotal && props.clase && <LinkNuevo content='Asignar Clase' to={ props.link } clase="true"></LinkNuevo> }
                 </div>
             </div>
         </div>
